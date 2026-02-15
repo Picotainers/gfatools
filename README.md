@@ -1,5 +1,5 @@
 # gfatools
-Small, distroless-when-possible container for `gfatools`.
+Small compatibility-focused container for `gfatools`.
 
 ## how to use
 ```bash

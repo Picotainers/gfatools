@@ -1,4 +1,4 @@
-name: Build and Publish Distroless gfatools
+name: Build and Publish gfatools
 
 on:
   push:
