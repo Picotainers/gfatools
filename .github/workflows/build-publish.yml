@@ -27,7 +27,7 @@ jobs:
           S	s1	ACGTACGT
           GFA
 
-          docker run --rm -v "$PWD/testdata:/data" picotainers-local/gfatools:smoke > testdata/help.txt 2>&1
+          docker run --rm -v "$PWD/testdata:/data" picotainers-local/gfatools:smoke > testdata/help.txt 2>&1 || true
           grep -Ei '^Usage: gfatools' testdata/help.txt
 
           docker run --rm -v "$PWD/testdata:/data" picotainers-local/gfatools:smoke stat /data/test.gfa > testdata/stat.txt
