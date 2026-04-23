@@ -46,7 +46,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: picotainers/gfatools:latest
+          tags: docker.io/picotainers/gfatools:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
