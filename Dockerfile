@@ -23,4 +23,4 @@ RUN make CFLAGS="-O2 -static" \
 FROM scratch
 COPY --from=builder /tmp/gfatools /usr/local/bin/gfatools
 WORKDIR /data
-ENTRYPOINT ["/usr/local/bin/gfatools"]
+CMD ["/usr/local/bin/gfatools", "--help"]
