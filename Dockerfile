@@ -20,7 +20,7 @@ RUN make CFLAGS="-O2 -static" \
     && test -x gfatools \
     && cp gfatools /tmp/gfatools
 
-FROM scratch
+FROM debian:bookworm-slim
 COPY --from=builder /tmp/gfatools /usr/local/bin/gfatools
 WORKDIR /data
 CMD ["/usr/local/bin/gfatools", "--help"]
