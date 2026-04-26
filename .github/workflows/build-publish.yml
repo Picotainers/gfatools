@@ -24,10 +24,12 @@ jobs:
           mkdir -p testdata
           printf 'H\tVN:Z:1.0\nS\ts1\tACGTACGT\n' > testdata/test.gfa
 
-          docker run --rm -v "$PWD/testdata:/data" picotainers-local/gfatools:smoke --help > testdata/help.txt 2>&1 || true
-          grep -Ei '^Usage: gfatools' testdata/help.txt
+          # Use version command (exit 0) instead of bare run (exit 1)
+          docker run --rm picotainers-local/gfatools:smoke version > testdata/version.txt 2>&1
+          grep -q 'gfatools:' testdata/version.txt
 
-          docker run --rm -v "$PWD/testdata:/data" picotainers-local/gfatools:smoke stat /data/test.gfa > testdata/stat.txt
+          # Functional stat command
+          docker run --rm -v "$PWD/testdata:/data" picotainers-local/gfatools:smoke stat /data/test.gfa > testdata/stat.txt 2>&1
           test -s testdata/stat.txt
 
   publish:
@@ -52,6 +54,10 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: picotainers/gfatools:latest
+          outputs: type=docker,dest=/tmp/image.tar
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
