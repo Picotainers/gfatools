@@ -22,7 +22,7 @@ jobs:
       - name: Smoke test
         run: |
           set -euo pipefail
-          docker run --rm picotainers-local/gfatools:smoke view 2>&1 > /tmp/gfatools_help.txt || true
+          docker run --rm picotainers-local/gfatools:smoke view > /tmp/gfatools_help.txt 2>&1 || true
           test -s /tmp/gfatools_help.txt
           grep -Ei 'gfatools|usage|view' /tmp/gfatools_help.txt
 
