@@ -24,4 +24,3 @@ FROM scratch
 COPY --from=builder /tmp/gfatools /usr/local/bin/gfatools
 WORKDIR /data
 ENTRYPOINT ["/usr/local/bin/gfatools"]
-CMD ["--help"]
